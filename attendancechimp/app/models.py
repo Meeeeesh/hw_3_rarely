@@ -2,32 +2,28 @@ from django.db import models
  
  
 class InstructorProfile(models.Model):
-    """An Instructor.
- 
-    One Instructor may teach multiple Courses.
+    """One Instructor may teach multiple Courses.
  
     Fields:
         instructor_id: ID number (primary key).
-        name:          Full name.
+        name: Full name.
     """
-    instructor_id = models.CharField(max_length=13, primary_key=True)
-    name = models.CharField(max_length=100)
+    instructor_id = models.CharField(max_length=15, primary_key=True)
+    name = models.CharField(max_length=50)
  
     def __str__(self):
         return self.name
  
  
 class StudentProfile(models.Model):
-    """A Student.
- 
-    One Student may enroll in multiple Courses and upload many QR codes.
+    """One Student may enroll in multiple Courses and upload many QR codes.
  
     Fields:
         student_id: ID number (primary key).
-        name:       Full name.
+        name: Full name.
     """
-    student_id = models.CharField(max_length=13, primary_key=True)
-    name = models.CharField(max_length=100)
+    student_id = models.CharField(max_length=15, primary_key=True)
+    name = models.CharField(max_length=50)
  
     def __str__(self):
         return self.name
@@ -40,15 +36,15 @@ class Course(models.Model):
     If the Instructor is deleted, Course is kept and instructor set to NULL.
  
     Fields:
-        id:           auto-incrementing primary key
-        name:         Name of the course.
-        instructor:   The Instructor who teaches the course (id).
+        id: auto-incrementing primary key
+        name: Name of the course.
+        instructor: The Instructor who teaches the course (id).
         meeting_days: Days the course meets, e.g. "MWF" or "TTh".
         meeting_time: Time the course starts.
     """
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
     instructor = models.ForeignKey(InstructorProfile, on_delete=models.SET_NULL, null=True)
-    meeting_days = models.CharField(max_length=10)
+    meeting_days = models.CharField(max_length=15)
     meeting_time = models.TimeField()
  
     def __str__(self):
@@ -75,15 +71,13 @@ class Enrollment(models.Model):
  
  
 class Lecture(models.Model):
-    """One meeting of a Course.
- 
-    Relationship: many Lectures for one Course (foreign key).
+    """Relationship: many Lectures for one Course (foreign key).
     If the Course is deleted, its Lectures are deleted too.
  
     Fields:
-        id:      Added automatically by Django (auto-incrementing primary key).
-        course:  The Course this lecture belongs to.
-        date:    The date of the lecture.
+        id: Added automatically by Django (auto-incrementing primary key).
+        course: The Course this lecture belongs to.
+        date: The date of the lecture.
         qr_code: Unique identifier shown as a QR code in class.
     """
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
