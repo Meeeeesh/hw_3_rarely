@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
  
  
 class InstructorProfile(models.Model):
@@ -8,6 +9,7 @@ class InstructorProfile(models.Model):
         instructor_id: ID number (primary key).
         name: Full name.
     """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     instructor_id = models.CharField(max_length=15, primary_key=True)
     name = models.CharField(max_length=50)
  
@@ -22,6 +24,7 @@ class StudentProfile(models.Model):
         student_id: ID number (primary key).
         name: Full name.
     """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     student_id = models.CharField(max_length=15, primary_key=True)
     name = models.CharField(max_length=50)
  
