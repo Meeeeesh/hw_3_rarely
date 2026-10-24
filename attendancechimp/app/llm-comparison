@@ -1,0 +1,3 @@
+The human version of the models.py document is much simpler and easier to reproduce. 
+At the same time, the llm version is more complete and has more features in each table and a more specific description of each feature than my human version.
+The robot llm version also has more classes and helper functions within the general tables to help with authentication and informational pathways.
